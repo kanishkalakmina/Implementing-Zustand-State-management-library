@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import useStore from "../../lib/store"; // Import your Zustand store
-import Link from "next/link";
 
 const Page2: React.FC = () => {
   const { data } = useStore();
@@ -14,7 +13,6 @@ const Page2: React.FC = () => {
           <li key={index}>{item}</li>
         ))}
       </ul>
-      <Link href="/thd">Go to Page 3</Link>
     </div>
   );
 };

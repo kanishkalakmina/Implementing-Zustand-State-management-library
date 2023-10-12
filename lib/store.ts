@@ -1,35 +1,15 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import create, { SetState } from "zustand";
 
-export interface SelectedData {
-  name: string;
-  firstName: string;
-  lastName: string;
-  email: string;
+// Define the state type
+interface StoreState {
+  data: string[];
+  addData: (item: string) => void;
 }
 
-export interface SelectedDataStore {
-  selectedData: SelectedData;
-  updateSelectedData: (data: SelectedData) => void;
-}
+// Create and export the store
+const useStore = create<StoreState>((set: SetState<StoreState>) => ({
+  data: [],
+  addData: (item: string) => set((state) => ({ data: [...state.data, item] })),
+}));
 
-const useSelectedDataStore = create(
-  persist(
-    (set) => ({
-      selectedData: {
-        name: "",
-        firstName: "",
-        lastName: "",
-        email: "",
-      },
-      updateSelectedData: (data: any) => {
-        set({ selectedData: data });
-      },
-    }),
-    {
-      name: "key",
-      getStorage: () => sessionStorage,
-    }
-  )
-);
-export default useSelectedDataStore;
+export default useStore;
