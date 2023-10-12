@@ -1,15 +1,27 @@
-import create, { SetState } from "zustand";
+import create from "zustand";
 
-// Define the state type
 interface StoreState {
   data: string[];
+  selectedData: {
+    name: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+  };
   addData: (item: string) => void;
+  setSelectedData: (data: StoreState["selectedData"]) => void;
 }
 
-// Create and export the store
-const useStore = create<StoreState>((set: SetState<StoreState>) => ({
+const useStore = create<StoreState>((set) => ({
   data: [],
+  selectedData: {
+    name: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+  },
   addData: (item: string) => set((state) => ({ data: [...state.data, item] })),
+  setSelectedData: (data) => set({ selectedData: data }),
 }));
 
 export default useStore;

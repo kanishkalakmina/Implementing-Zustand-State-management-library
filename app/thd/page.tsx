@@ -3,7 +3,7 @@ import React from "react";
 import useStore from "../../lib/store"; // Import your Zustand store
 
 const Page2: React.FC = () => {
-  const { data } = useStore();
+  const { data, selectedData } = useStore();
 
   return (
     <div>
@@ -13,6 +13,15 @@ const Page2: React.FC = () => {
           <li key={index}>{item}</li>
         ))}
       </ul>
+      <div>
+        <h1>Selected Data:</h1>
+        <ul>
+          <li>Name: {selectedData.name}</li>
+          <li>First Name: {selectedData.firstName}</li>
+          <li>Last Name: {selectedData.lastName}</li>
+          <li>Email: {selectedData.email}</li>
+        </ul>
+      </div>
     </div>
   );
 };
